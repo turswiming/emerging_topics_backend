@@ -78,6 +78,7 @@ For example, to install PyTorch with CUDA support, you can use the following com
 
 ```sh
 pip install torch torchvision torchaudio
+```
 ## Step 1: Install PyTorch
 
 First, install PyTorch. You can find the appropriate installation command for your system and preferences on the [PyTorch website](https://pytorch.org/get-started/locally/).
