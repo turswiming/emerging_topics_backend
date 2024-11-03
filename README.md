@@ -124,7 +124,8 @@ docker run --rm -it emerging_topic_backend:latest
 ```
 
 - **--rm**: Automatically removes the container when it exits.
-- **-it**: Runs the container in interactive mode with a terminal.
+- **-it**: Runs the container in interactive mode with a terminal.  
+
 the output should be:
 ```
 Fetching 15 files: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:00<00:00, 3088.74it/s]
