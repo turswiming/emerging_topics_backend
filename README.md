@@ -1,74 +1,7 @@
-# Setup Instructions
-before you do the following things, I highly suggest you to use virtual python environment
+# Setup Instructions for Development
 ## Step 0: Create a Python Virtual Environment
 
 Before installing dependencies, it's recommended to create and activate a Python virtual environment. This helps manage project-specific packages and avoid conflicts with other projects.
-
-### Using `venv` (Python 3.3+)
-
-1. **Create the Virtual Environment**
-
-    Open your terminal and navigate to your project directory. Then run:
-
-    ```sh
-    python3 -m venv env
-    ```
-
-    This command creates a virtual environment named `env` in your project directory.
-
-2. **Activate the Virtual Environment**
-
-    - **On Linux and macOS:**
-
-        ```sh
-        source env/bin/activate
-        ```
-
-    - **On Windows:**
-
-        ```sh
-        .\env\Scripts\activate
-        ```
-
-3. **Verify Activation**
-
-    Once activated, your terminal prompt will change to indicate that you are now working inside the virtual environment. It typically looks like `(env)` preceding your command prompt.
-
-4. **Deactivate the Virtual Environment**
-
-    To deactivate the virtual environment and return to the global Python environment, simply run:
-
-    ```sh
-    deactivate
-    ```
-
-### Additional Tips
-
-- **Installing Packages:**
-
-    With the virtual environment activated, you can install packages using `pip` without affecting the global Python installation:
-
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-- **Freezing Dependencies:**
-
-    To generate a `requirements.txt` file with all installed packages, run:
-
-    ```sh
-    pip freeze > requirements.txt
-    ```
-
-- **Removing the Virtual Environment:**
-
-    If you need to remove the virtual environment, deactivate it first and then delete the `env` directory:
-
-    ```sh
-    deactivate
-    rm -rf env  # On Linux and macOS
-    rmdir /s /q env  # On Windows
-    ```
 
 ## Step 1: Install PyTorch
 
@@ -91,7 +24,7 @@ After installing PyTorch, install the required dependencies listed in the **requ
 pip install -r requirements.txt
 ```
 
-# Building and Running the Docker Image
+# Setup Instructions for Deployment
 
 Follow these instructions to build and run your Docker image for the PyTorch project.
 
