@@ -25,3 +25,5 @@ if __name__ == '__main__':
     print(embeddings.shape)
     similarities = model.similarity(embeddings, embeddings)
     print(similarities)
+
+    #following code handing the api
