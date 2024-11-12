@@ -40,7 +40,9 @@ user_db = {
               "email": "9965478233"
           }},
 }
-
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 @app.get("/admin/searchCompanion")
 async def search_companion(requirements: str):
