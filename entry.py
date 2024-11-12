@@ -3,6 +3,18 @@ from download_model import downloader
 import uvicorn
 from fastapi_service import app
 
+def is_docker():
+    try:
+        with open('/proc/1/cgroup', 'rt') as f:
+            return 'docker' in f.read()
+    except FileNotFoundError:
+        return False
+
+if is_docker():
+    print("Running inside Docker")
+else:
+    print("Not running inside Docker")
+
 if True:
 
     # Download all files from the specified repository
@@ -29,5 +41,8 @@ if True:
 
     #following code handing the api
     #this line  will execute the fastapi_service.py first
-    
-    uvicorn.run(app, host="0.0.0.0", port=8800)
+    port = 8800
+    if is_docker():
+        uvicorn.run(app, host="0.0.0.0", port=port)
+    else:
+        uvicorn.run(app, host="127.0.0.1", port=port)
