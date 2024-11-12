@@ -1,7 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from download_model import downloader
 import uvicorn
-from fastapi_service import app
 
 def is_docker():
     try:
@@ -40,9 +39,14 @@ if True:
     print(similarities)
 
     #following code handing the api
+    
     #this line  will execute the fastapi_service.py first
+    from fastapi_service import app
+
     port = 8800
     if is_docker():
+        # for docker to expose the port
         uvicorn.run(app, host="0.0.0.0", port=port)
     else:
+        # for local machine to read the port
         uvicorn.run(app, host="127.0.0.1", port=port)
