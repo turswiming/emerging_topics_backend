@@ -1,8 +1,8 @@
-import torch
 from sentence_transformers import SentenceTransformer
 from download_model import downloader
+
+
 if __name__ == '__main__':
-    from huggingface_hub import snapshot_download
 
     # Download all files from the specified repository
     downloader().download_models()
