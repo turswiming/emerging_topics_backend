@@ -19,5 +19,7 @@ RUN echo "Starting model download, it may take time and looks stuck, please be p
     python download_model.py && \
     echo "Model downloaded successfully."
 
+EXPOSE 8800
+
 # Specify the command to run the application
 CMD ["python", "entry.py"]

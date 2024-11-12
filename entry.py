@@ -1,8 +1,9 @@
 from sentence_transformers import SentenceTransformer
 from download_model import downloader
+import uvicorn
+from fastapi_service import app
 
-
-if __name__ == '__main__':
+if True:
 
     # Download all files from the specified repository
     downloader().download_models()
@@ -27,3 +28,6 @@ if __name__ == '__main__':
     print(similarities)
 
     #following code handing the api
+    #this line  will execute the fastapi_service.py first
+    
+    uvicorn.run(app, host="0.0.0.0", port=8800)

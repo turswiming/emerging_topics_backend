@@ -44,7 +44,7 @@ docker build -t emerging_topic_backend:latest .
 After building the image, run a container using the following command:
 
 ```sh
-docker run --rm -it emerging_topic_backend:latest
+docker run --rm -it -p 8800:8800 emerging_topic_backend:latest
 ```
 
 - **--rm**: Automatically removes the container when it exits.
