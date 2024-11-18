@@ -19,3 +19,6 @@ Dockerfile
 .dockerignore
 
 model.safetensors
+
+/plt_images/
+/model_linear/

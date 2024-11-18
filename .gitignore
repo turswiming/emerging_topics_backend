@@ -76,7 +76,6 @@ ipython_config.py
 .vscode/
 *.code-workspace
 
-
 # Model files
 model_files/
 *.onnx
@@ -107,3 +106,6 @@ logs/
 # Miscellaneous
 *.swp
 *.swo
+
+/plt_images/
+/model_linear/
