@@ -38,13 +38,13 @@ Open your terminal and navigate to the root directory of your project where the 
 
 ## Step 2: Build the Docker Image
 ```sh
-docker build -t emerging_topic_backend:latest .
+docker build -t emerging_topics_backend:latest .
 ```
 ## Step 3: Run the Docker Container
 After building the image, run a container using the following command:
 
 ```sh
-docker run --rm -it -p 8800:8800 emerging_topic_backend:latest
+docker run --rm -it -p 8800:8800 emerging_topics_backend:latest
 ```
 
 - **--rm**: Automatically removes the container when it exits.
