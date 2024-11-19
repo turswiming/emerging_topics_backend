@@ -1,9 +1,20 @@
 from fastapi import FastAPI
 import uvicorn
 import json
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
+origins = [
+    "*",
+    # 可以根据需要添加其他源
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,            # 允许的源
+    allow_credentials=True,           # 是否允许发送 cookies 等凭证信息
+    allow_methods=["*"],              # 允许的HTTP方法
+    allow_headers=["*"],              # 允许的HTTP头
+)
 # 假设数据库中匹配的潜在搭子数据
 potential_companion_db = [
     {
@@ -33,7 +44,7 @@ user_db = {
               "email": ""
           }
     },
-    "4698730": {"user_id": "梵高的向日葵", "age": "30", "gender": "女", "city": "北京", "introduction": "I love painting",
+    "4698730": {"user_id": "梵高的向日葵哈哈", "age": "30", "gender": "女", "city": "北京", "introduction": "I love painting",
            "contact_info":{
               "qq": "1689521433",
               "wechat": "fangao_",
