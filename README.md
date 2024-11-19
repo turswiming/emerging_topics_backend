@@ -34,11 +34,14 @@ Follow these instructions to build and run your Docker image for the PyTorch pro
 
 ## Step 1: Navigate to Project Directory and Create Docker Network
 
+
+Open your terminal and navigate to the root directory of your project where the `Dockerfile` is located.
+
 ```
 docker network create emerging_topics_network
 ```
 
-Open your terminal and navigate to the root directory of your project where the `Dockerfile` is located.
+
 
 ## Step 2: Build the Docker Image
 ```sh
