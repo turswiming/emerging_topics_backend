@@ -2,8 +2,11 @@ from fastapi import FastAPI
 import uvicorn
 import json
 from fastapi.middleware.cors import CORSMiddleware
+from find_mate import find_mate_from_groups, check_mate_similarity
+
 app = FastAPI()
 
+# 允许跨域请求
 origins = [
     "*",
     # 可以根据需要添加其他源
