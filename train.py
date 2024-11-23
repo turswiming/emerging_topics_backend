@@ -9,6 +9,7 @@ import json
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import os
+from model import DualInputModel
 model_save_path = 'model_linear/'
 plt_save_path = 'plt_images/'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -24,18 +25,6 @@ if os.path.exists(plt_save_path):
 else:
     os.makedirs(plt_save_path)
 
-# Define the model
-class DualInputModel(nn.Module):
-    def __init__(self, input_dim1, input_dim2, hidden_dim):
-        super(DualInputModel, self).__init__()
-        self.linear1 = nn.Linear(input_dim1, hidden_dim)
-        self.linear2 = nn.Linear(input_dim2, hidden_dim)
-    
-    def forward(self, x1, x2):
-        out1 = self.linear1(x1)
-        out2 = self.linear2(x2)
-        similarity = F.cosine_similarity(out1.to(device), out2.to(device))
-        return similarity
 
 model = SentenceTransformer("model_files")
 with open('result.json', 'r') as f:
@@ -48,7 +37,8 @@ labels = []
 for i in tqdm(range(len(data))):
     request1s.append(data[i]['request1'])
     request2s.append(data[i]['request2'])
-    labels.append(data[i]['relevance'])
+    labels.append(data[i]['relevance']*2-1)
+
 
 labels = torch.tensor(labels, dtype=torch.float32)
 embedding1s = model.encode(request1s)
@@ -63,12 +53,13 @@ embedding2s = embedding2s.to(device)
 # Create DataLoader
 dataset = TensorDataset(embedding1s, embedding2s, labels)
 loader = DataLoader(dataset, batch_size=512, shuffle=True)
-
+testloader = DataLoader(dataset, batch_size=512, shuffle=True)
 # Initialize model, loss, optimizer
 model = DualInputModel(input_dim1=embedding1s.shape[1], input_dim2=embedding1s.shape[1], hidden_dim=800)
 model.to(device)
 criterion = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
+
 
 # Training loop
 epochs = 50000
