@@ -15,7 +15,7 @@ class DeepLearningModel:
             cls.SBERTmodel = SentenceTransformer("model_files")
             #load model from weight
             cls.linear_model = DualInputModel(768,768,800)
-            weights_path = "model_epoch.pth"  # 替换为您的权重文件路径
+            weights_path = "model_epoch.pth"  
             if os.path.exists(weights_path):
                 cls.load_model_weights(weights_path)
             else:
@@ -31,9 +31,9 @@ class DeepLearningModel:
             weights_path (str): 权重文件的路径。
         """
         try:
-            state_dict = torch.load(weights_path, map_location=torch.device('cpu'))  # 根据需要修改设备
+            state_dict = torch.load(weights_path, map_location=torch.device('cpu'))
             cls.linear_model.load_state_dict(state_dict)
-            cls.linear_model.eval()  # 设置为评估模式
+            cls.linear_model.eval()
             print("模型权重加载成功。")
         except Exception as e:
             print(f"加载模型权重时出错: {e}")
