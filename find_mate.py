@@ -54,17 +54,17 @@ def check_mate_similarity(query_text:str, group_text:List[str]) -> List[float]:
     #todo: implement the function
     results = []
     for text in group_text:
-        for i in range(len(text)):
-            vec = DeepLearningModel().SBERTmodel.encode(text[i])
-            query_vec = DeepLearningModel().SBERTmodel.encode(query_text)
-            #convert vec and query_vec to torch tensor
-            vec_tensor = torch.tensor(vec, dtype=torch.float32)
-            query_vec_tensor = torch.tensor(query_vec, dtype=torch.float32)
+        vec = DeepLearningModel().SBERTmodel.encode(text)
+        query_vec = DeepLearningModel().SBERTmodel.encode(query_text)
+        origin_similarity = DeepLearningModel().SBERTmodel.similarity(vec,query_vec)
+        #convert vec and query_vec to torch tensor
+        vec_tensor = torch.tensor(vec, dtype=torch.float32)
+        query_vec_tensor = torch.tensor(query_vec, dtype=torch.float32)
 
-            # 将一维张量转换为二维张量，形状从 [feature_dim] -> [1, feature_dim]
-            vec_tensor = vec_tensor.unsqueeze(0)
-            query_vec_tensor = query_vec_tensor.unsqueeze(0)
-            similarity = DeepLearningModel().linear_model.forward(query_vec_tensor,vec_tensor)
-            similarity = similarity.item()
+        # 将一维张量转换为二维张量，形状从 [feature_dim] -> [1, feature_dim]
+        vec_tensor = vec_tensor.unsqueeze(0)
+        query_vec_tensor = query_vec_tensor.unsqueeze(0)
+        similarity = DeepLearningModel().linear_model.forward(query_vec_tensor,vec_tensor)
+        similarity = similarity.item()-origin_similarity.item()
         results.append(similarity)
     return results
