@@ -15,7 +15,7 @@ class DeepLearningModel:
             cls.SBERTmodel = SentenceTransformer("model_files")
             #load model from weight
             cls.linear_model = DualInputModel(768,768,800)
-            weights_path = "model_linear/model_epoch_2400.pth"  # 替换为您的权重文件路径
+            weights_path = "model_epoch.pth"  # 替换为您的权重文件路径
             if os.path.exists(weights_path):
                 cls.load_model_weights(weights_path)
             else:
