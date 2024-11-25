@@ -37,7 +37,41 @@ potential_companion_db = [
         }
     },
 ]
+import random
 
+first_names = ["James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth",
+               "David", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", "Charles", "Karen",
+               "Christopher", "Nancy", "Daniel", "Lisa", "Matthew", "Betty", "Anthony", "Margaret", "Mark", "Sandra",
+               "Donald", "Ashley", "Steven", "Kimberly", "Paul", "Emily", "Andrew", "Donna", "Joshua", "Michelle",
+               "Kenneth", "Dorothy", "Kevin", "Carol", "Brian", "Amanda", "George", "Melissa", "Edward", "Deborah"]
+
+last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+              "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin",
+              "Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson",
+              "Walker", "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores",
+              "Green", "Adams", "Nelson", "Baker", "Hall", "Rivera", "Campbell", "Mitchell", "Carter", "Roberts"]
+
+with open("result.json", "r") as f:
+    intro_data = json.load(f)
+for i in range (100):
+    names = f"{random.choice(first_names)} {random.choice(last_names)}"
+    #create random age
+    age = random.randint(18,35)
+    #create random gender
+    gender = random.choice(["男","女"])
+    #create random city
+    city = random.choice(["上海","北京","广州","深圳"])
+    intro = random.choice(intro_data)["request1"]
+    #create random qq number
+    qq = random.randint(1000000000,9999999999)
+    potential_companion_db.append({
+        "user_number": i, "user_id": names, "age": age,"gender": gender, "city": city, "introduction": intro,
+        "contact_info": {
+            "qq": qq,
+            "wechat": "",
+            "email": ""
+        }
+    },)
 # 假设数据库中的用户信息
 user_db = {
     "2850673": {"user_id": "蜡笔大新", "age": "25", "gender": "男", "city": "上海", "introduction": "I love hiking",
