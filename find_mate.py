@@ -77,28 +77,27 @@ def initialize_database():
         CREATE TABLE IF NOT EXISTS matches (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             query_text TEXT,
-            matched_text_id INTEGER
+            matched_text_content TEXT
         )
     ''')
     connection.commit()
     connection.close()
-def save_matched_text_id(query_text: str, matched_text_id: int):
+
+# 存储匹配的文本内容到数据库
+def save_matched_text_content(query_text: str, matched_text_content: str):
     connection = sqlite3.connect('matches.db')
     cursor = connection.cursor()
     cursor.execute('''
-        INSERT INTO matches (query_text, matched_text_id) 
+        INSERT INTO matches (query_text, matched_text_content) 
         VALUES (?, ?)
-    ''', (query_text, matched_text_id))
+    ''', (query_text, matched_text_content))
     connection.commit()
     connection.close()
 def find_mate_from_groups(query_text: str, group_text: List[str]) -> int:
     similarities = check_mate_similarity(query_text, group_text)
     index = similarities.index(max(similarities))
-    
-    # 获取最匹配文本的 ID
-    matched_text_id = group_text[index].parent.id
-    # 将最匹配文本的 ID 保存到数据库
-    save_matched_text_id(query_text, matched_text_id)
+    matched_text_content = group_text[index]
+    save_matched_text_content(query_text, matched_text_content)
     
     return index
-initialize_database()    
+initialize_database()
