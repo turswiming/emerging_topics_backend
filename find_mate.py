@@ -93,11 +93,3 @@ def save_matched_text_content(query_text: str, matched_text_content: str):
     ''', (query_text, matched_text_content))
     connection.commit()
     connection.close()
-def find_mate_from_groups(query_text: str, group_text: List[str]) -> int:
-    similarities = check_mate_similarity(query_text, group_text)
-    index = similarities.index(max(similarities))
-    matched_text_content = group_text[index]
-    save_matched_text_content(query_text, matched_text_content)
-    
-    return index
-initialize_database()
