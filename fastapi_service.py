@@ -96,6 +96,7 @@ global_requirements = ""
 async def search_companion(requirements: str):
     print(requirements)
     # 根据查询参数过滤潜在搭子数据
+    global global_requirements
     data = "收到需求，正在查询中 ... "
     global_requirements = requirements
     response_data = {"code": 200, "data": json.dumps(data)}
