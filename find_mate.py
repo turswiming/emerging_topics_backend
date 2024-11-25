@@ -4,6 +4,8 @@ import os
 from download_model import downloader
 from sentence_transformers import SentenceTransformer
 from model import DualInputModel
+import sqlite3
+from typing import List
 class DeepLearningModel:
     _instance = None
     SBERTmodel = None
@@ -68,3 +70,26 @@ def check_mate_similarity(query_text:str, group_text:List[str]) -> List[float]:
         similarity = similarity.item()-origin_similarity.item()
         results.append(similarity)
     return results
+def initialize_database():
+    connection = sqlite3.connect('matches.db')
+    cursor = connection.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS matches (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            query_text TEXT,
+            matched_text_content TEXT
+        )
+    ''')
+    connection.commit()
+    connection.close()
+
+# 存储匹配的文本内容到数据库
+def save_matched_text_content(query_text: str, matched_text_content: str):
+    connection = sqlite3.connect('matches.db')
+    cursor = connection.cursor()
+    cursor.execute('''
+        INSERT INTO matches (query_text, matched_text_content) 
+        VALUES (?, ?)
+    ''', (query_text, matched_text_content))
+    connection.commit()
+    connection.close()
