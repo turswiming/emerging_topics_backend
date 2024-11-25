@@ -57,12 +57,13 @@ user_db = {
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-
+global_requirements = ""
 @app.get("/admin/searchCompanion")
 async def search_companion(requirements: str):
     print(requirements)
     # 根据查询参数过滤潜在搭子数据
     data = "收到需求，正在查询中 ... "
+    global_requirements = requirements
     response_data = {"code": 200, "data": json.dumps(data)}
     return response_data
 
@@ -71,6 +72,12 @@ async def search_companion(requirements: str):
 async def get_potential_companion():
     # 返回所有潜在搭子数据
     data = potential_companion_db
+    str_list = []
+    for i in potential_companion_db:
+        str_list.append(i["introduction"])
+    similarity = check_mate_similarity(global_requirements,str_list)
+    #sort potential_companion_db by similarity
+    data = potential_companion_db.sort(key=lambda x: similarity[str_list.index(x["introduction"])],reverse=True)
     response_data = {"code": 200, "data": json.dumps(data)}
     return response_data
 
