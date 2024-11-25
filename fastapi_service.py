@@ -97,8 +97,15 @@ async def search_companion(requirements: str):
     print(requirements)
     # 根据查询参数过滤潜在搭子数据
     global global_requirements
-    data = "收到需求，正在查询中 ... "
     global_requirements = requirements
+
+    data = random.sample(potential_companion_db,50)
+    str_list = []
+    for i in potential_companion_db:
+        str_list.append(i["introduction"])
+    index = find_mate_from_groups(global_requirements,str_list)
+    data = str_list[index]
+
     response_data = {"code": 200, "data": json.dumps(data)}
     return response_data
 
@@ -106,7 +113,8 @@ async def search_companion(requirements: str):
 @app.get("/admin/getPotentialCompanion")
 async def get_potential_companion():
     # 返回所有潜在搭子数据
-    data = potential_companion_db
+    #select random 50 from potential_companion_db
+    data = random.sample(potential_companion_db,50)
     str_list = []
     for i in potential_companion_db:
         str_list.append(i["introduction"])
