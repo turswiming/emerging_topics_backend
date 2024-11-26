@@ -116,11 +116,11 @@ async def get_potential_companion():
     #select random 50 from potential_companion_db
     data = random.sample(potential_companion_db,50)
     str_list = []
-    for i in potential_companion_db:
+    for i in data:
         str_list.append(i["introduction"])
     similarity = check_mate_similarity(global_requirements,str_list)
     #sort potential_companion_db by similarity
-    data = potential_companion_db.sort(key=lambda x: similarity[str_list.index(x["introduction"])],reverse=True)
+    data.sort(key=lambda x: similarity[str_list.index(x["introduction"])],reverse=True)
     response_data = {"code": 200, "data": json.dumps(data)}
     return response_data
 
