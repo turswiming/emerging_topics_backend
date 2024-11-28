@@ -1,4 +1,7 @@
-# Setup Instructions for Development
+# Setup Instructions for Development 
+This is the backend of PolyU COMP5544 teamwork project.
+The frontend github project can be found [here](https://github.com/Damocles1112/emerging_topics_frontend)
+
 ## Step 0: Create a Python Virtual Environment
 
 Before installing dependencies, it's recommended to create and activate a Python virtual environment. This helps manage project-specific packages and avoid conflicts with other projects.
